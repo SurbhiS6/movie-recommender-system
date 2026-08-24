@@ -29,15 +29,12 @@ movie_selected = st.selectbox('Pick your choice of movie', movies['title'].value
 
 ###__adding_in_movies_posters__###
 
+@st.cache_data
 def get_poster(imdb_id):
     api_key = os.environ['OMDB_API_KEY']
-    url = f' http://www.omdbapi.com/'
+    url = f' http://www.omdbapi.com/?apikey={api_key}&i={imdb_id}'
     
-    params = {
-        "api_key": api_key,
-        "i":imdb_id
-    }
-
+    
     response = requests.get(url)
     data = response.json()
 
