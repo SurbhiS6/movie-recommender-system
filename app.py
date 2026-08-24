@@ -2,6 +2,7 @@ import pickle
 import streamlit as st
 import pandas as pd
 import requests
+import os
 
 
 
@@ -23,19 +24,27 @@ similarity = pickle.load(open('similarity.pkl','rb'))
 ##__creating_a_DropDown_Menu__##
 
 movie_selected = st.selectbox('Pick your choice of movie', movies['title'].values)
-print(type(movie_selected))
+
 
 
 ###__adding_in_movies_posters__###
 
 def get_poster(imdb_id):
-    url = f'http://www.omdbapi.com/?i={imdb_id}&apikey=51180bca'
+    # api_key = os.environ['OMDB_API_KEY']
+    url = f' http://www.omdbapi.com/?i={imdb_id}&apikey=51180bca'
+    
+    # params = {
+    #     "api_key": api_key,
+    #     "i":imdb_id
+    # }
+
     response = requests.get(url)
     data = response.json()
-    if data.get("Response") == "True":
-        return data.get("Poster")
 
-    
+    if data.get("Response") == "True":
+        poster = data.get("Poster")
+        return poster
+             
     return None
 
 
@@ -72,22 +81,37 @@ if st.button('Recommend Movies'):
     col0, col1, col2, col3, col4 = st.columns(5)
 
     with col0:
-        st.image(recommended_movies_posters[0])
+        if recommended_movies_posters[0]:
+            st.image(recommended_movies_posters[0])
+        else:
+            st.write("<Poster Not Found>")
         st.text(recommended_movies[0])
 
     with col1:
-        st.image(recommended_movies_posters[1])
+        if recommended_movies_posters[1]:
+            st.image(recommended_movies_posters[1])
+        else:
+            st.write("<Poster Not Found>")
         st.text(recommended_movies[1])
         
     with col2:
-        st.image(recommended_movies_posters[2])
+        if recommended_movies_posters[2]:
+            st.image(recommended_movies_posters[2])
+        else:
+            st.write("<Poster Not Found>")
         st.text(recommended_movies[2])
         
     with col3:
-        st.image(recommended_movies_posters[3])
+        if recommended_movies_posters[3]:
+            st.image(recommended_movies_posters[3])
+        else:
+            st.write("<Poster Not Found>")
         st.text(recommended_movies[3])
         
     with col4:
-        st.image(recommended_movies_posters[4])
+        if recommended_movies_posters[4]:
+            st.image(recommended_movies_posters[4])
+        else:
+            st.write("<Poster Not Found>")
         st.text(recommended_movies[4])
         
