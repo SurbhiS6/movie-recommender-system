@@ -4,10 +4,10 @@
 
 **Link to the Recommender System** - https://movie-recommender-system-nkhs.onrender.com/
 
-**How It Works**
+**How It Works:**
 The system uses content-based filtering to identify movies similar to the user's selected movie based on movie attributes and similarity scores.
 
-**Movie Recommender System**
+**Movie Recommender System:**
 Built an interactive Movie Recommender System using Python and Streamlit, allowing users to discover movies based on their selected movie and receive personalised recommendations.
 
 **Tech Stack:**
